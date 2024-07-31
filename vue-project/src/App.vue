@@ -20,7 +20,7 @@
                     </el-header>
 
                     <el-main>
-                        <div v-if="store.sob">
+                        <div v-if="setStore.sob">
                             <router-view></router-view>
                         </div>
                     </el-main>
@@ -41,7 +41,7 @@ export default {
         return {
             notoken: !localStorage.getItem('token'),
             noCustomerId: !localStorage.getItem('customerId'),
-            store: useSetStore()
+            setStore: useSetStore()
         }
     },
     created() {

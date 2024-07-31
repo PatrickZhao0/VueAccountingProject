@@ -1,0 +1,21 @@
+.h-100 {
+    height: 100%;
+}
+.h-100-v{
+    height: 100vh;
+}
+.a-item{
+    align-items: center;
+}
+
+.j-item{
+    justify-items: center;
+}
+
+.flex{
+    display: flex;
+}
+
+.font-smaller {
+    font-size: smaller !important;
+}

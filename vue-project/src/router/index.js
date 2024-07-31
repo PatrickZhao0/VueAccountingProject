@@ -13,6 +13,7 @@ import Setting_AccountAccounting from '@/pages/Setting/Setting_AccountAccounting
 import Setting from '@/pages/Setting.vue'
 import Report from '@/pages/Report.vue'
 import Report_Debt from '@/pages/Report/Report_Debt.vue'
+import Report_IncomeStatement from '@/pages/Report/Report_IncomeStatement.vue'
 // import Voucher from '@/pages/Voucher.vue'
 // import EditVoucher from '@/pages/Voucher/EditVoucher.vue'
 // import Income from '@/pages/Bill/Income.vue'
@@ -136,6 +137,10 @@ const router = createRouter({
         {
           path: 'debt',
           component: Report_Debt
+        },
+        {
+          path: 'incomeStatement',
+          component: Report_IncomeStatement
         }
       ]
     }

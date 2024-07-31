@@ -1,6 +1,8 @@
 <template>
     <div>
-        <el-date-picker></el-date-picker>
+        <el-date-picker
+        type="month"
+        />
     </div>
     <el-table
     :data="finalForm"

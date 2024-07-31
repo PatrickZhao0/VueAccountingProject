@@ -80,12 +80,6 @@ export default {
             const customerId = localStorage.getItem('customerId');
             const res = await req_cusSOBsetting(customerId);
             this.store.sob = res;
-            console.log(this.store.sob);
-            this.pushToCustomerInfoStore(res);
-        },
-
-        pushToCustomerInfoStore(payload) {
-            this.$store.commit('customer/updateBasicInfo', payload);
         },
 
         async getCustomerInfoSimplified() {

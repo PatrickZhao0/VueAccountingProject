@@ -88,6 +88,7 @@ export default {
 
         async getavailablePeriods() {
             this.availablePeriodInfo = await req_cusAvailPeriods(this.customerSelection);
+            this.store.availablePeriods = this.availablePeriodInfo;
             this.dateSelection = this.availablePeriodInfo[this.availablePeriodInfo.length - 1].period;
         },
 

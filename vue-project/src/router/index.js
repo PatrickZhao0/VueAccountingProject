@@ -14,6 +14,7 @@ import Setting from '@/pages/Setting.vue'
 import Report from '@/pages/Report.vue'
 import Report_Debt from '@/pages/Report/Report_Debt.vue'
 import Report_IncomeStatement from '@/pages/Report/Report_IncomeStatement.vue'
+import Report_CashFlow from '@/pages/Report/Report_CashFlow.vue'
 // import Voucher from '@/pages/Voucher.vue'
 // import EditVoucher from '@/pages/Voucher/EditVoucher.vue'
 // import Income from '@/pages/Bill/Income.vue'
@@ -141,6 +142,10 @@ const router = createRouter({
         {
           path: 'incomeStatement',
           component: Report_IncomeStatement
+        },
+        {
+          path: 'CashFlow',
+          component: Report_CashFlow
         }
       ]
     }

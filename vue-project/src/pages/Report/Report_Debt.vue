@@ -2,10 +2,16 @@
     <div>
         <el-date-picker
         type="month"
+        format="YYYY-MM"
+        v-model="dateSelection"
+        :disabled-date="disabledPeriods"
+        :clearable= 'false'
+        :size= "'small'"
+        @change="updateFinalTable"
         />
     </div>
     <el-table
-    :data="finalForm"
+    :data="finalTable"
     height="550"
     border>
         <el-table-column label="资产">
@@ -30,20 +36,28 @@
 
 <script setup>
 import { req_reportDebt } from '@/request/report';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useSetStore } from '@/pinia/set';
+const store = useSetStore();
+const customerId = localStorage.getItem("customerId");
 
 //hooks
 onMounted(async () => {
+    updateFinalTable();
+});
+
+
+const finalTable = ref([]);
+const updateFinalTable = async () => {
     let rawForm = await req_reportDebt({
         customerId: store.sob.customerId,
-        currentPeriod: store.sob.currentPeriod,
+        currentPeriod: formatedDateSelection.value,
         type: store.sob.companyType,
         subjectId: store.sob.subjectId
     });
-    asset = rawForm.slice(0, rawForm.length/2);
-    liability = rawForm.slice(rawForm.length/2, rawForm.length);
-    finalForm.value = asset.map((value, index) => {
+    let asset = rawForm.slice(0, rawForm.length/2);
+    let liability = rawForm.slice(rawForm.length/2, rawForm.length);
+    finalTable.value = asset.map((value, index) => {
         return {
             ...asset[index], 
             configId1: liability[index].configId,
@@ -61,16 +75,19 @@ onMounted(async () => {
             subjectId1: liability[index].subjectId
         }
     });
+}
+
+const dateSelection = ref(new Date(store.sob.currentPeriod));
+const formatedDateSelection = computed(() => {
+    return `${dateSelection.value.getFullYear()}-${(dateSelection.value.getMonth() + 1).toString().padStart(2, '0')}`
 });
-
-let asset = [];
-let liability = [];
-const finalForm = ref([]);
-
-
-
-const customerId = localStorage.getItem("customerId");
-let store = useSetStore();
-
-
+const disabledPeriods = time => {
+    for (let item of store.availablePeriods) {
+        let available = new Date(item.period);
+        if (available.getFullYear() === time.getFullYear() && available.getMonth() === time.getMonth()){
+            return false;
+        }
+    }
+    return true;
+};
 </script>

@@ -7,7 +7,7 @@
                     共{{total}}条, {{ totalPageInteger }}页
                 </span>
             
-                <el-select style="width: 150px;" v-model="pageFlipper.pageSize" @change="this.$emit('pageChange', returnData)" :disabled="!disableFlag">
+                <el-select style="width: 150px;" v-model="pageFlipper.pageSize" :disabled="!disableFlag">
                     <el-option v-for="item in [3,10,20,30,50,100]" :key="item" :value="item" :label="`${item}条/页`"></el-option>
                 </el-select>
         
@@ -69,7 +69,7 @@ export default {
 
     computed: {
         totalPageInteger() {
-            return Math.floor(this.total / this.pageFlipper.pageSize);
+            return Math.floor(this.total / this.pageFlipper.pageSize) + 1;
         },
 
         returnData() {
